@@ -1,0 +1,11 @@
+---
+
+- name: Create a Frontend Deployment by reading the definition from a local file
+  kubernetes.core.k8s:
+    state: present
+    src: ../files/frontend.yml
+
+- name: Create a Backend Deployment by reading the definition from a local file
+  kubernetes.core.k8s:
+    state: present
+    src: ../files/backend.yml

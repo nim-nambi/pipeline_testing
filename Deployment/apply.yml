@@ -1,0 +1,6 @@
+---
+
+- name: Apply K8 yaml file
+  hosts: Tag_Type_Worker
+  roles:
+    -  role: deploy

@@ -1,0 +1,17 @@
+plugin: aws_ec2
+aws_access_key: ""
+aws_secret_key: ""
+
+regions:
+  - ap-south-1
+
+filters:
+  instance-state-name: running
+strict: False
+
+keyed_groups:
+  - key: tags
+    prefix: Tag
+
+hostnames:
+  - ip-address
