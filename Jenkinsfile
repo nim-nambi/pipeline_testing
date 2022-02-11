@@ -52,7 +52,7 @@ pipeline{
             steps {
                 echo 'Testing...'
                 snykSecurity(
-                snykInstallation: '<Your Snyk Installation Name>',
+                snykInstallation: 'Snyk@latest',
                 snykTokenId: 'Snyk_sec_token',
                 failOnError: true
                 )
