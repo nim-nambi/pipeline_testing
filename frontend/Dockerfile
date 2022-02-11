@@ -1,28 +1,13 @@
-FROM node:12-alpine as builder
-WORKDIR /app
-COPY package*.json /app
+FROM node:10.4.3
+WORKDIR /usr/src/app
+COPY package*.json ./
+ADD package.json /usr/src/app/package.json
 RUN npm install
-COPY . /app
-RUN npm run build
-
-FROM nginx:alpine
+RUN npm install react-scripts@1.1.0 -g
+COPY . .
+EXPOSE 3000
+CMD ["npm ","start"];
 # ----------------------------------
 
-# Clean nginx
-RUN rm -rf /usr/share/nginx/html/*
-
-# Copy dist
-COPY --from=builder /app/dist /usr/share/nginx/html
-COPY ./nginx.conf /etc/nginx/default.conf
-
-WORKDIR /usr/share/nginx/html
-
-# Permission
-RUN chown root /usr/share/nginx/html/*
-RUN chmod 755 /usr/share/nginx/html/*
-
-# Expose port
-EXPOSE 4200
-
-# Start
-CMD ["nginx", "-g", "daemon off;"]
+FROM nginx:1.19.0
+COPY build/ /usr/share/nginx/html

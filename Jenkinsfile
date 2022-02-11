@@ -33,12 +33,29 @@ pipeline{
         stage("Unit Testing"){
             steps{
                 dir('Frontend'){
-                    sh "npm test" 
+                    // sh "npm test" 
+                    sh """
+                    echo "unit Testing frontend"
+                    """
                 }
 
                 dir('Backend'){
-                    sh "npm test" 
+                    // sh "npm test" 
+                    sh """
+                    echo "unit Testing Backend"
+                    """
                 }
+            }
+        }
+
+        stage('CQA'){
+            steps {
+                echo 'Testing...'
+                snykSecurity(
+                snykInstallation: '<Your Snyk Installation Name>',
+                snykTokenId: 'Snyk_sec_token',
+                failOnError: true
+                )
             }
         }
 
