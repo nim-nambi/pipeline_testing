@@ -20,12 +20,16 @@ pipeline{
 
         stage("Install dependencies"){
             steps{
-                dir('Frontend'){
-                    sh "npm install" 
+                dir('frontend'){
+                    nodejs('node') {
+                        sh 'npm install'
+                    }
                 }
 
-                dir('Backend'){
-                    sh "npm install" 
+                dir('backend'){
+                   nodejs('node') {
+                        sh 'npm install'
+                    } 
                 }
             }
         }
