@@ -17,50 +17,47 @@ pipeline{
                 """
             }
         }
+        nodejs('node'){
+            stage("Install dependencies"){
+                steps{
+                    dir('frontend'){
+                        sh 'npm install'
+                    }
 
-        stage("Install dependencies"){
-            steps{
-                dir('frontend'){
-                    nodejs('node') {
+                    dir('backend'){
                         sh 'npm install'
                     }
                 }
+            }
 
-                dir('backend'){
-                   nodejs('node') {
-                        sh 'npm install'
-                    } 
+            stage('CQA'){
+                steps {
+                    snykSecurity(
+                    snykInstallation: 'Snyk@latest',
+                    snykTokenId: 'Snyk_sec_token',
+                    failOnError: true
+                    )
                 }
             }
-        }
 
-        stage("Unit Testing"){
-            steps{
-                dir('Frontend'){
-                    // sh "npm test" 
-                    sh """
-                    echo "unit Testing frontend"
-                    """
-                }
+            stage("Unit Testing"){
+                steps{
+                    dir('Frontend'){
+                        // sh "npm test" 
+                        sh """
+                        echo "unit Testing frontend"
+                        """
+                    }
 
-                dir('Backend'){
-                    // sh "npm test" 
-                    sh """
-                    echo "unit Testing Backend"
-                    """
+                    dir('Backend'){
+                        // sh "npm test" 
+                        sh """
+                        echo "unit Testing Backend"
+                        """
+                    }
                 }
             }
-        }
 
-        stage('CQA'){
-            steps {
-                echo 'Testing...'
-                snykSecurity(
-                snykInstallation: 'Snyk@latest',
-                snykTokenId: 'Snyk_sec_token',
-                failOnError: true
-                )
-            }
         }
 
         stage("Docker Login"){
