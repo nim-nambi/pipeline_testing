@@ -7,7 +7,7 @@ const todoRoutes = express.Router();
 const PORT = 4000;
 
 let Todo = require("./todo.model");
-
+//arhum u noob
 app.use(cors());
 app.use(bodyParser.json());
 
