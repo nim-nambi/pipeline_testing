@@ -40,7 +40,6 @@ pipeline{
                 snykInstallation: 'Snyk@latest',
                 snykTokenId: 'Snyk_sec_token',
                 failOnIssues: false
-                failOnError: true
                 organisation: "nim-nambi"
                 )
             }
