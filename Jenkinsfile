@@ -2,6 +2,7 @@ pipeline{
     agent any
     tools{
         nodejs "node"
+        // snyk "Snyk@latest"
     }
     environment{
         BUILD_VERSION = '1.0.0'
@@ -34,16 +35,16 @@ pipeline{
             }
         }
 
-        stage('CQA'){
-            steps {
-                snykSecurity(
-                snykInstallation: 'Snyk@latest',
-                snykTokenId: 'Snyk_sec_token',
-                failOnIssues: false
-                organisation: "nim-nambi"
-                )
-            }
-        }
+        // stage('CQA'){
+        //     steps {
+        //         snykSecurity(
+        //             snykInstallation: 'Snyk@latest',
+        //             snykTokenId: 'Snyk_sec_token',
+        //             failOnIssues: false
+        //             organisation: "nim-nambi"
+        //         )
+        //     }
+        // }
 
         stage("Unit Testing"){
             steps{
