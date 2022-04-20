@@ -5,19 +5,19 @@ pipeline{
         // snyk "Snyk@latest"
     }
     environment{
-        BUILD_VERSION = '1.0.0'
+        BUILD_VERSION = '1.0.1'
     }
 
     stages{
 
-        stage('Cleanup Workspace') {
-            steps {
-                cleanWs()
-                sh """
-                echo "Cleaned Up Workspace For Project"
-                """
-            }
-        }
+        // stage('Cleanup Workspace') {
+        //     steps {
+        //         cleanWs()
+        //         sh """
+        //         echo "Cleaned Up Workspace For Project"
+        //         """
+        //     }
+        // }
         
         stage("Install dependencies"){
             steps{
